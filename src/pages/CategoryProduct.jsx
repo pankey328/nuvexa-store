@@ -32,14 +32,12 @@ const CategoryProduct = () => {
     window.scrollTo(0, 0);
   }, [category]);
 
-  console.log(`searchData`, searchData);
-
-  // PREMIUM LOADING STATE
+  // LOADING STATE
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[70vh] lg:min-h-screen gap-6 bg-white dark:bg-[#0a0a0a]">
+      <div className="flex flex-col items-center justify-center min-h-[70vh] lg:min-h-screen gap-6 bg-white dark:bg-[#0a0a0a] transition-colors duration-300">
         <RingLoader
-          color="#111111" // Changed to sleek black for premium feel
+          color="#888888" 
           loading={loading}
           size={50}
           speedMultiplier={0.8}
@@ -52,7 +50,7 @@ const CategoryProduct = () => {
   }
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white dark:bg-[#0a0a0a] min-h-screen transition-colors duration-300">
       {searchData.length > 0 ? (
         <div
           className="max-w-6xl mx-auto
@@ -67,12 +65,12 @@ const CategoryProduct = () => {
             flex items-center gap-2
             px-4 sm:px-5 py-2.5 sm:py-3
             rounded-full
-            bg-[#f5f5f7]
-            border border-gray-100
-            text-neutral-800
+            bg-[#f5f5f7] dark:bg-[#141414]
+            border border-gray-100 dark:border-white/[0.06]
+            text-neutral-800 dark:text-neutral-200
             text-sm font-medium tracking-wide
-            hover:bg-white
-            hover:border-gray-200
+            hover:bg-white dark:hover:bg-[#1a1a1a]
+            hover:border-gray-200 dark:hover:border-white/10
             hover:shadow-[0_10px_30px_-12px_rgba(0,0,0,0.08)]
             active:scale-[0.97]
             transition-all duration-500
@@ -101,11 +99,11 @@ const CategoryProduct = () => {
         >
           <div
             className="flex flex-col items-center justify-center
-            bg-[#f5f5f7]
+            bg-[#f5f5f7] dark:bg-[#141414]
             rounded-[32px]
-            border border-gray-100
+            border border-gray-100 dark:border-white/[0.06]
             px-6 sm:px-10 py-8 sm:py-10
-            shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)]"
+            shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
           >
             <Lottie
               animationData={notfound}
@@ -116,7 +114,7 @@ const CategoryProduct = () => {
             <p
               className="mt-2 sm:mt-4
               text-sm sm:text-base
-              text-neutral-500
+              text-neutral-500 dark:text-neutral-400
               font-medium tracking-wide"
             >
               No products found in this collection

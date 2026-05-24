@@ -1,7 +1,10 @@
 import React from "react";
 import banner from "../assets/banner1.jpg";
+import { useNavigate } from "react-router-dom";
 
 const MidBanner = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full bg-white dark:bg-[#0a0a0a] py-12 md:py-24 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <div
@@ -34,7 +37,10 @@ const MidBanner = () => {
             </p>
 
             {/* Button */}
-            <button className="group flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-bold text-sm tracking-wide shadow-[0_8px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_12px_30px_rgba(255,255,255,0.25)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]">
+            <button
+              onClick={() => navigate("/products")}
+              className="group flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-bold text-sm tracking-wide shadow-[0_8px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_12px_30px_rgba(255,255,255,0.25)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]"
+            >
               <span>Shop Now</span>
 
               <svg

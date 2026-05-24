@@ -21,9 +21,11 @@ const Products = () => {
   const { data, loading, error } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(fetchAllProducts());
-     window.scrollTo({ top: 0, behavior: "smooth" });          // scrolls up
-  }, [dispatch]);
+    if (data.length === 0) {
+      dispatch(fetchAllProducts());
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" }); // scrolls up
+  }, [dispatch, data.length]);
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -56,9 +58,9 @@ const Products = () => {
   //  LOADING STATE
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[70vh] lg:min-h-screen gap-6 bg-white dark:bg-[#0a0a0a]">
+      <div className="flex flex-col items-center justify-center min-h-[70vh] lg:min-h-screen gap-6 bg-white dark:bg-[#0a0a0a] transition-colors duration-300">
         <RingLoader
-          color="#111111" 
+          color="#888888" // Updated to a neutral gray for visibility in both modes
           loading={loading}
           size={50}
           speedMultiplier={0.8}
@@ -73,7 +75,7 @@ const Products = () => {
   //  ERROR STATE
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-[70vh] bg-white dark:bg-[#0a0a0a]">
+      <div className="flex items-center justify-center min-h-[70vh] bg-white dark:bg-[#0a0a0a] transition-colors duration-300">
         <div className="px-6 py-4 rounded-2xl bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
           <p className="text-sm font-medium text-red-600 dark:text-red-400 tracking-wide">
             Something went wrong: {error}
@@ -86,7 +88,7 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0a0a] transition-colors duration-300">
       {/* EXPANDED MAX-WIDTH FOR BETTER GRID BREATHING ROOM */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 mb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 pb-20">
         <MobileFilter
           openFilter={openFilter}
           setOpenFilter={setOpenFilter}
@@ -147,12 +149,12 @@ const Products = () => {
                 <Lottie.default
                   animationData={notfound}
                   loop={true}
-                  className="w-[200px] sm:w-[280px] md:w-[350px] opacity-80 mix-blend-multiply dark:mix-blend-screen"
+                  className="w-[200px] sm:w-[280px] md:w-[350px] opacity-80 mix-blend-multiply dark:mix-blend-normal"
                 />
-                <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 dark:text-neutral-100 tracking-tight">
+                <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 dark:text-neutral-100 tracking-tight transition-colors duration-300">
                   No products found
                 </h3>
-                <p className="text-sm font-medium text-neutral-500 text-center max-w-sm">
+                <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400 text-center max-w-sm transition-colors duration-300">
                   We couldn't find any items matching your current filters. Try
                   adjusting your search criteria.
                 </p>

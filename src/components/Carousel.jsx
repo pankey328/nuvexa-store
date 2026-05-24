@@ -7,14 +7,19 @@ import Slider from "react-slick";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import Category from "./Category";
 import { RingLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
 const Carousel = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data, loading, error } = useSelector((state) => state.products);
 
-  useEffect(() => {
-    dispatch(fetchAllProducts());
-  }, [dispatch]);
+ useEffect(() => {
+   //  Only fetch if we don't have the data yet
+   if (data.length === 0) {
+     dispatch(fetchAllProducts());
+   }
+ }, [dispatch, data.length]);
 
   //  Floating Prev Arrow
   const SamplePrevArrow = (props) => {
@@ -113,7 +118,10 @@ const Carousel = () => {
                       {item.description}
                     </p>
 
-                    <button className="group mt-4 sm:mt-6 flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold text-sm tracking-wide shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_12px_24px_rgba(255,255,255,0.2)] hover:-translate-y-1 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]">
+                    <button
+                      onClick={() => navigate(`/products/${item.id}`)}
+                      className="group mt-4 sm:mt-6 flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold text-sm tracking-wide shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_12px_24px_rgba(255,255,255,0.2)] hover:-translate-y-1 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                    >
                       <span>Shop Now</span>
                       <svg
                         className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"

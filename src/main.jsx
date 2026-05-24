@@ -13,18 +13,12 @@ createRoot(document.getElementById("root")).render(
       <App />
       <ScrollToTop
         smooth
-        color="#ffffff"
+        className="!flex !items-center !justify-center !rounded-full !shadow-xl bg-black dark:bg-white text-white dark:text-black transition-colors duration-300"
         style={{
-          backgroundColor: "#000000",
-          borderRadius: "100%",
           width: "48px",
           height: "48px",
-          boxShadow: "0 12px 24px rgba(0,0,0,0.15)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          right: "1.75rem", 
-          bottom: "6rem", 
+          right: "1.75rem",
+          bottom: "6rem",
           zIndex: 99,
         }}
       />

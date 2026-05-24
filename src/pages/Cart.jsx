@@ -10,18 +10,18 @@ import {
   decreaseQuantity,
   removeFromCart,
 } from "../redux/slices/cartSlice";
-import emptyCart from '../assets/emptyCart.json'
+import emptyCart from "../assets/emptyCart.json";
 import Lottie from "lottie-react";
 
 const Cart = ({ location, getLocation }) => {
-    const [formData, setFormData] = useState({
-      name: "",
-      phone: "",
-      address: "",
-      state: "",
-      postcode: "",
-      country: "",
-    });
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    state: "",
+    postcode: "",
+    country: "",
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -44,7 +44,7 @@ const Cart = ({ location, getLocation }) => {
         country: location?.country || prev.country,
       }));
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });  
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location]);
 
   const handleSaveDetails = () => {
@@ -73,7 +73,7 @@ const Cart = ({ location, getLocation }) => {
                   Your Cart
                 </h2>
               </div>
-              <span className="text-sm font-semibold text-neutral-500 bg-[#f5f5f7] dark:bg-[#141414] px-4 py-1.5 rounded-full">
+              <span className="text-sm font-semibold text-neutral-500 bg-[#f5f5f7] dark:bg-[#141414] px-4 py-1.5 rounded-full transition-colors duration-300">
                 {cartItems.length} {cartItems.length === 1 ? "Item" : "Items"}
               </span>
             </div>
@@ -91,11 +91,11 @@ const Cart = ({ location, getLocation }) => {
                     >
                       {/* Product Info */}
                       <div className="flex items-center gap-5 w-full sm:w-auto">
-                        <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 bg-[#f5f5f7] dark:bg-[#0a0a0a] rounded-2xl p-2 flex items-center justify-center">
+                        <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 bg-[#f5f5f7] dark:bg-[#0a0a0a] rounded-2xl p-2 flex items-center justify-center transition-colors duration-300">
                           <img
                             src={item.thumbnail}
                             alt={item.title}
-                            className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal"
+                            className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal transition-all duration-300"
                           />
                         </div>
                         <div className="flex flex-col justify-center max-w-[200px] md:max-w-[300px]">
@@ -111,19 +111,19 @@ const Cart = ({ location, getLocation }) => {
                       {/* Controls */}
                       <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-6 sm:gap-8">
                         {/* Quantity Pill */}
-                        <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#f5f5f7] dark:bg-[#0a0a0a] border border-gray-200 dark:border-white/10">
+                        <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#f5f5f7] dark:bg-[#0a0a0a] border border-gray-200 dark:border-white/10 transition-colors duration-300">
                           <button
                             onClick={() => dispatch(decreaseQuantity(item.id))}
-                            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-white dark:bg-[#141414] text-lg font-medium text-black dark:text-white shadow-sm hover:scale-105 active:scale-95 transition-all"
+                            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-white dark:bg-[#141414] text-lg font-medium text-black dark:text-white shadow-sm hover:scale-105 active:scale-95 transition-all duration-300"
                           >
                             -
                           </button>
-                          <span className="w-6 text-center text-sm font-semibold text-black dark:text-white tabular-nums">
+                          <span className="w-6 text-center text-sm font-semibold text-black dark:text-white tabular-nums transition-colors duration-300">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() => dispatch(increaseQuantity(item.id))}
-                            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-white dark:bg-[#141414] text-lg font-medium text-black dark:text-white shadow-sm hover:scale-105 active:scale-95 transition-all"
+                            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-white dark:bg-[#141414] text-lg font-medium text-black dark:text-white shadow-sm hover:scale-105 active:scale-95 transition-all duration-300"
                           >
                             +
                           </button>
@@ -143,8 +143,8 @@ const Cart = ({ location, getLocation }) => {
                 </div>
 
                 {/* Delivery Info Section */}
-                <div className="bg-[#f5f5f7] dark:bg-[#141414] rounded-[2.5rem] p-6 sm:p-10 border border-gray-100 dark:border-white/5">
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white tracking-tight mb-8">
+                <div className="bg-[#f5f5f7] dark:bg-[#141414] rounded-[2.5rem] p-6 sm:p-10 border border-gray-100 dark:border-white/5 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white tracking-tight mb-8 transition-colors duration-300">
                     Delivery Details
                   </h3>
 
@@ -242,7 +242,7 @@ const Cart = ({ location, getLocation }) => {
                     <div className="md:col-span-2 mt-4">
                       <button
                         onClick={handleSaveDetails}
-                        className="w-full py-4 rounded-2xl bg-neutral-900 text-white dark:bg-white dark:text-black font-semibold text-sm tracking-wide shadow-md hover:bg-black active:scale-[0.98] transition-all duration-300"
+                        className="w-full py-4 rounded-2xl bg-neutral-900 text-white dark:bg-white dark:text-black font-semibold text-sm tracking-wide shadow-md hover:bg-black dark:hover:bg-neutral-200 active:scale-[0.98] transition-all duration-300"
                       >
                         Save Address Details
                       </button>
@@ -251,11 +251,11 @@ const Cart = ({ location, getLocation }) => {
 
                   {/* Divider */}
                   <div className="flex items-center gap-4 my-8">
-                    <div className="h-px bg-gray-200 dark:bg-white/10 flex-1"></div>
+                    <div className="h-px bg-gray-200 dark:bg-white/10 flex-1 transition-colors duration-300"></div>
                     <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em]">
                       or
                     </span>
-                    <div className="h-px bg-gray-200 dark:bg-white/10 flex-1"></div>
+                    <div className="h-px bg-gray-200 dark:bg-white/10 flex-1 transition-colors duration-300"></div>
                   </div>
 
                   <button
@@ -281,8 +281,8 @@ const Cart = ({ location, getLocation }) => {
 
               {/* RIGHT COLUMN: Order Summary (Sticky) */}
               <div className="lg:col-span-5 xl:col-span-4 h-max lg:sticky lg:top-24">
-                <div className="bg-white dark:bg-[#141414] border border-gray-100 dark:border-white/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none rounded-[2.5rem] p-6 sm:p-8">
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white tracking-tight mb-6">
+                <div className="bg-white dark:bg-[#141414] border border-gray-100 dark:border-white/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none rounded-[2.5rem] p-6 sm:p-8 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white tracking-tight mb-6 transition-colors duration-300">
                     Order Summary
                   </h3>
 
@@ -292,7 +292,7 @@ const Cart = ({ location, getLocation }) => {
                         <LuNotebookText className="text-lg opacity-70" />{" "}
                         Subtotal
                       </span>
-                      <span className="text-neutral-900 dark:text-white">
+                      <span className="text-neutral-900 dark:text-white transition-colors duration-300">
                         ${totalPrice.toFixed(2)}
                       </span>
                     </div>
@@ -302,7 +302,7 @@ const Cart = ({ location, getLocation }) => {
                         <MdDeliveryDining className="text-xl opacity-70" />{" "}
                         Shipping
                       </span>
-                      <span className="text-green-600 dark:text-green-400 font-semibold">
+                      <span className="text-green-600 dark:text-green-400 font-semibold transition-colors duration-300">
                         <span className="text-neutral-400 line-through font-normal mr-2">
                           $25.00
                         </span>
@@ -315,19 +315,19 @@ const Cart = ({ location, getLocation }) => {
                         <GiShoppingBag className="text-lg opacity-70" />{" "}
                         Handling Fee
                       </span>
-                      <span className="text-neutral-900 dark:text-white">
+                      <span className="text-neutral-900 dark:text-white transition-colors duration-300">
                         $5.00
                       </span>
                     </div>
                   </div>
 
-                  <div className="h-px bg-gray-100 dark:bg-white/10 w-full my-6"></div>
+                  <div className="h-px bg-gray-100 dark:bg-white/10 w-full my-6 transition-colors duration-300"></div>
 
                   <div className="flex justify-between items-end mb-8">
-                    <span className="text-base font-semibold text-neutral-900 dark:text-white">
+                    <span className="text-base font-semibold text-neutral-900 dark:text-white transition-colors duration-300">
                       Total
                     </span>
-                    <span className="text-3xl font-extrabold text-neutral-900 dark:text-white tracking-tighter">
+                    <span className="text-3xl font-extrabold text-neutral-900 dark:text-white tracking-tighter transition-colors duration-300">
                       ${(totalPrice + 5).toFixed(2)}
                     </span>
                   </div>
@@ -343,7 +343,7 @@ const Cart = ({ location, getLocation }) => {
                         placeholder="Enter code"
                         className="w-full px-4 py-3 bg-[#f5f5f7] dark:bg-[#0a0a0a] border border-transparent hover:border-gray-200 dark:hover:border-white/10 text-sm font-medium text-neutral-900 dark:text-white rounded-xl outline-none focus:border-black dark:focus:border-white transition-all duration-300"
                       />
-                      <button className="px-5 py-3 rounded-xl bg-white dark:bg-[#141414] border border-gray-200 dark:border-white/10 text-neutral-900 dark:text-white font-semibold text-sm hover:border-black dark:hover:border-white transition-all">
+                      <button className="px-5 py-3 rounded-xl bg-white dark:bg-[#141414] border border-gray-200 dark:border-white/10 text-neutral-900 dark:text-white font-semibold text-sm hover:border-black dark:hover:border-white transition-all duration-300">
                         Apply
                       </button>
                     </div>
@@ -365,7 +365,7 @@ const Cart = ({ location, getLocation }) => {
                       <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
                   </button>
-                  <p className="text-center text-xs font-medium text-neutral-400 mt-4 flex items-center justify-center gap-1.5">
+                  <p className="text-center text-xs font-medium text-neutral-400 mt-4 flex items-center justify-center gap-1.5 transition-colors duration-300">
                     <svg
                       width="12"
                       height="12"
@@ -394,20 +394,21 @@ const Cart = ({ location, getLocation }) => {
           </div>
         ) : (
           /* EMPTY STATE */
-          <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-10">
+          <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-10 transition-colors duration-300">
             <div className="relative mb-8">
-              <div className="absolute inset-0 bg-neutral-100 dark:bg-white/5 blur-3xl rounded-full scale-150"></div>
+              <div className="absolute inset-0 bg-neutral-100 dark:bg-white/5 blur-3xl rounded-full scale-150 transition-colors duration-300"></div>
+              {/* FIXED: Changed to mix-blend-normal for dark mode */}
               <Lottie.default
                 animationData={emptyCart}
                 loop={false}
-                className="w-[200px] sm:w-[280px] md:w-[350px] opacity-80 mix-blend-multiply dark:mix-blend-screen"
+                className="w-[200px] sm:w-[280px] md:w-[350px] opacity-80 mix-blend-multiply dark:mix-blend-normal transition-all duration-300"
               />
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-900 dark:text-white tracking-tighter mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-900 dark:text-white tracking-tighter mb-4 transition-colors duration-300">
               Your cart is empty.
             </h1>
-            <p className="text-base sm:text-lg text-neutral-500 dark:text-neutral-400 font-medium max-w-md mb-10">
+            <p className="text-base sm:text-lg text-neutral-500 dark:text-neutral-400 font-medium max-w-md mb-10 transition-colors duration-300">
               Looks like you haven't added anything yet. Discover our latest
               products and power up your tech life.
             </p>

@@ -83,8 +83,8 @@ const Chatbot = () => {
   const [botProducts, setBotProducts] = useState([]);
   const messagesEndRef = useRef(null);
 
-  // Check Redux state 
-  const reduxProducts = useSelector((state) => state.products?.products || state.products?.items || []);
+  // Check Redux state
+  const reduxProducts = useSelector((state) => state.products?.data || []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -94,17 +94,11 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // SELF-SUFFICIENT BOT LOGIC: If Redux is empty, fetch the data directly!
+  // SELF-SUFFICIENT BOT LOGIC!
   useEffect(() => {
     if (reduxProducts.length > 0) {
       setBotProducts(reduxProducts);
-    } else {
-      // Background fetch so the bot always knows what you sell, even on the Home page
-      fetch('https://dummyjson.com/products?limit=194')
-        .then((res) => res.json())
-        .then((data) => setBotProducts(data.products))
-        .catch((err) => console.error("Bot failed to load products", err));
-    }
+    } 
   }, [reduxProducts]);
 
   // CHATBOT BRAIN
@@ -114,19 +108,25 @@ const Chatbot = () => {
 
     // 1. DYNAMIC API LOGIC: Check if user is asking about specific categories
     const uniqueCategories = [...new Set(botProducts.map((p) => p.category))];
-    
+
     for (let category of uniqueCategories) {
       if (!category) continue;
-      
+
       const cleanCategory = category.replace(/-/g, " ").toLowerCase();
-      const singularCategory = cleanCategory.endsWith('s') 
-        ? cleanCategory.slice(0, -1) 
+      const singularCategory = cleanCategory.endsWith("s")
+        ? cleanCategory.slice(0, -1)
         : cleanCategory;
 
-      if (cleanInput.includes(cleanCategory) || cleanInput.includes(singularCategory)) {
-        const categoryItems = botProducts.filter((p) => p.category === category);
-        const displayCategory = cleanCategory.charAt(0).toUpperCase() + cleanCategory.slice(1);
-        
+      if (
+        cleanInput.includes(cleanCategory) ||
+        cleanInput.includes(singularCategory)
+      ) {
+        const categoryItems = botProducts.filter(
+          (p) => p.category === category,
+        );
+        const displayCategory =
+          cleanCategory.charAt(0).toUpperCase() + cleanCategory.slice(1);
+
         return `Yes, we have ${categoryItems.length} items in the ${displayCategory} category! For example, our ${categoryItems[0].title} is only $${categoryItems[0].price}. Head to our Products page to see them all.`;
       }
     }
@@ -255,6 +255,6 @@ const Chatbot = () => {
       </div>
     </div>
   );
-};
+};;
 
 export default Chatbot;
