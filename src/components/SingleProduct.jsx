@@ -33,6 +33,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     getSingleProduct();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id]);
 
   const originalPrice = Math.round(
